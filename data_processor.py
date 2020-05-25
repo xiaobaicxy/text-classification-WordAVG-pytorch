@@ -11,6 +11,7 @@ import torch
 import torch.nn as nn
 from torch.autograd import Variable
 
+#使得每次初始化的随机数相同
 torch.manual_seed(123)
 class DataProcessor(object):
     def read_text(self,is_train_data):
@@ -77,7 +78,6 @@ class DataProcessor(object):
         return word2index, vocab_size
     
     def get_datasets(self, vocab_size, embedding_size, max_len):
-        #注，由于nn.Embedding每次生成的词嵌入不固定，因此此处同时获取训练数据的词嵌入和测试数据的词嵌入
         #测试数据的词表也用训练数据创建
         train_datas, train_labels = self.read_text(is_train_data=True)
         word2index, vocab_size = self.word_index(train_datas, vocab_size)
